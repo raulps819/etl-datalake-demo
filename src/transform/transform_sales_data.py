@@ -229,12 +229,12 @@ def create_star_schema(customers_df, products_df, sales_df):
         F.col("amount_before_discount") - F.col("discount_amount")
     )
     
-    # Select final fact table columns
+    # Select final fact table columns and rename date to sale_date
     fact_sales = fact_sales.select(
         "sale_id",
         "customer_id",
         "product_id",
-        "date",
+        F.col("date").alias("sale_date"),
         "quantity",
         "unit_price",
         "discount_percent",
