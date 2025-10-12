@@ -1,0 +1,44 @@
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table customers {
+  customer_id integer [primary key]
+  name varchar(255) [not null]
+  email varchar(255) [not null, unique]
+  country varchar(100)
+  registration_date date
+  segment varchar(50)
+  city varchar(255)
+  
+  Note: 'Customer dimension - demographic and segmentation data'
+}
+
+Table products {
+  product_id integer [primary key]
+  product_name varchar(255) [not null]
+  category varchar(100) [not null]
+  unit_price decimal(10,2) [not null]
+  supplier varchar(255)
+  rating decimal(3,1)
+  
+  Note: 'Product dimension - catalog and supplier information'
+}
+
+Table sales {
+  sale_id integer [primary key]
+  customer_id integer [not null, ref: > customers.customer_id]
+  product_id integer [not null, ref: > products.product_id]
+  sale_date date [not null]
+  quantity integer [not null]
+  unit_price decimal(10,2) [not null]
+  discount_percent decimal(5,2) [default: 0]
+  amount_before_discount decimal(12,2) [not null]
+  discount_amount decimal(12,2) [default: 0]
+  total_amount decimal(12,2) [not null]
+  payment_method varchar(50)
+  status varchar(50)
+  
+  Note: 'Sales fact table - transactional data with calculated metrics'
+}
+
+// Star Schema Relationships
+// Fact table (sales) connects to dimension tables (customers, products)
