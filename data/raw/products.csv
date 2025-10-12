@@ -1,0 +1,151 @@
+product_id,product_name,category,unit_price,supplier,stock_quantity,weight_kg,rating
+101,Samsung Perfume,Beauty,168.3,Samsung,199,3.15,4.6
+102,Nike Makeup Kit,Beauty,150.96,Nike,329,2.51,4.1
+103,JBL T-Shirt,Clothing,144.58,JBL,147,2.0,4.8
+104,Microsoft Smartphone,Electronics,940.39,Microsoft,102,2.42,3.6
+105,Samsung Running Shoes,Sports,408.62,Samsung,32,1.11,3.5
+106,Nike Headphones,Electronics,363.58,Nike,40,0.86,3.8
+107,Samsung Self-Help,Books,41.7,Samsung,90,0.49,4.8
+108,JBL Programming Book,Books,19.3,JBL,35,3.38,4.2
+109,HP Electric Razor,Beauty,129.26,HP,174,4.9,4.5
+110,Microsoft Boots,Clothing,94.98,Microsoft,458,0.14,4.6
+111,Puma Lamp,Home,324.71,Puma,494,3.08,4.5
+112,Dell Shorts,Clothing,81.28,Dell,127,2.85,3.6
+113,Nike Desk,Home,710.94,Nike,281,4.64,4.5
+114,Apple Chair,Home,734.45,Apple,159,0.34,4.7
+115,Dell Running Shoes,Sports,240.63,Dell,328,4.55,4.7
+116,Puma Table,Home,726.43,Puma,352,2.66,3.7
+117,LG Monitor,Electronics,1166.35,LG,32,0.38,4.3
+118,Apple Speaker,Electronics,1393.01,Apple,465,2.09,4.3
+119,Reebok Cookbook,Books,42.73,Reebok,276,2.25,4.3
+120,Logitech Electric Razor,Beauty,187.36,Logitech,210,0.52,4.6
+121,JBL Sofa,Home,645.6,JBL,328,3.65,4.8
+122,Bose Laptop,Electronics,975.69,Bose,114,2.15,4.0
+123,Apple Dress,Clothing,66.44,Apple,266,4.0,3.6
+124,HP Jeans,Clothing,281.81,HP,391,1.31,3.7
+125,Bose Bookshelf,Home,694.06,Bose,35,4.39,3.5
+126,Dell Desk,Home,437.75,Dell,51,0.46,3.8
+127,Bose Sofa,Home,557.78,Bose,425,3.09,4.0
+128,Microsoft Chair,Home,68.64,,31,4.66,4.5
+129,LG Skincare Set,Beauty,182.59,LG,159,0.16,4.6
+130,Sony Skincare Set,Beauty,63.85,Sony,380,2.2,3.6
+131,Adidas Bicycle,Sports,185.25,Adidas,295,,4.1
+132,Nike Electric Razor,Beauty,-47.9,Nike,470,4.7,3.7
+133,Reebok Makeup Kit,Beauty,122.63,Reebok,330,3.76,4.6
+134,Reebok Headphones,Electronics,-405.53,Reebok,65,4.2,5.0
+135,HP Camera,Electronics,716.32,HP,79,2.77,4.3
+136,Nike Chair,Home,508.05,Nike,94,0.91,3.9
+137,Nike Cookbook,Books,39.47,Nike,115,2.81,3.9
+138,HP Hair Dryer,Beauty,92.01,HP,119,4.15,4.1
+139,Sony Hair Dryer,Beauty,77.04,Sony,232,0.83,4.4
+140,Nike Desk,Home,520.9,Nike,329,2.19,4.0
+141,LG Electric Razor,Beauty,159.32,LG,-7,0.37,4.9
+142,Logitech Curtains,Home,498.21,Logitech,299,1.15,3.8
+143,Dell Biography,Books,18.54,Dell,441,1.68,4.0
+144,LG T-Shirt,Clothing,135.38,LG,308,0.92,3.6
+145,Puma Running Shoes,Sports,456.99,Puma,77,4.29,4.1
+146,Sony Smartphone,Electronics,1441.68,Sony,486,4.56,3.6
+147,Puma Skincare Set,Beauty,183.62,Puma,178,1.64,3.7
+148,Microsoft Hair Dryer,Beauty,67.52,Microsoft,425,2.23,3.8
+149,HP Speaker,Electronics,1583.78,HP,498,4.29,9.7
+150,LG Biography,Books,14.25,LG,340,4.66,4.2
+151,Bose Lamp,Home,722.18,Bose,-9,1.08,4.5
+152,Bose Perfume,Beauty,67.25,Bose,410,4.53,3.6
+153,Puma Cookbook,Books,47.08,Puma,445,3.12,4.9
+154,Apple Makeup Kit,Beauty,28.72,Apple,333,1.97,4.6
+155,Sony Curtains,Home,696.41,Sony,323,2.43,4.6
+156,JBL Running Shoes,Sports,261.53,JBL,234,,3.9
+157,LG Makeup Kit,Beauty,178.8,LG,312,2.42,3.5
+158,Reebok Jeans,Clothing,251.24,Reebok,186,2.7,4.9
+159,Reebok Makeup Kit,Beauty,135.58,Reebok,215,2.13,3.6
+160,Microsoft Electric Razor,Beauty,123.87,Microsoft,437,4.16,3.6
+161,Dell T-Shirt,Clothing,82.41,Dell,55,4.4,4.7
+162,Microsoft Jacket,Clothing,129.63,Microsoft,202,4.65,4.5
+163,Samsung Bookshelf,Home,733.68,Samsung,228,1.91,4.1
+164,Logitech Camera,Electronics,823.0,Logitech,167,4.05,3.8
+165,Samsung Sofa,Home,428.2,Samsung,421,1.22,4.0
+166,Apple Jeans,Clothing,261.86,Apple,216,1.98,4.5
+167,Reebok Hair Dryer,Beauty,71.17,Reebok,373,4.98,4.8
+168,Sony Tablet,Electronics,678.84,Sony,210,1.98,3.5
+169,LG Hair Dryer,Beauty,56.93,LG,398,1.44,4.8
+170,LG Dress,Clothing,152.88,LG,354,3.42,3.7
+171,Nike Biography,Books,34.04,Nike,292,0.17,5.0
+172,JBL Programming Book,Books,18.86,JBL,72,3.72,4.6
+173,Bose Curtains,Home,374.58,Bose,161,1.49,5.0
+174,Canon Makeup Kit,Beauty,106.76,Canon,360,4.19,3.9
+175,Apple Biography,Books,45.59,,437,1.63,4.5
+176,Apple Sneakers,Clothing,172.57,Apple,46,1.04,4.9
+177,Microsoft Lamp,Home,653.28,Microsoft,101,2.51,4.4
+178,Microsoft Programming Book,Books,13.3,Microsoft,66,1.49,4.5
+179,Apple Jacket,Clothing,73.79,Apple,322,3.71,4.5
+180,Nike Perfume,Beauty,104.9,Nike,386,1.17,4.4
+181,Reebok Laptop,Electronics,1585.95,Reebok,127,2.59,4.6
+182,LG Chair,Home,265.79,LG,219,3.58,4.8
+183,Bose Dress,Clothing,153.73,Bose,22,4.06,3.7
+184,LG Yoga Mat,Sports,481.9,LG,365,2.11,4.7
+185,Nike Boots,Clothing,91.59,Nike,98,2.84,4.3
+186,Nike Bicycle,Sports,108.8,Nike,306,1.4,4.5
+187,Bose Smartphone,Electronics,1774.98,Bose,348,2.09,4.7
+188,HP Dumbbell,Sports,241.75,HP,305,0.61,3.7
+189,Reebok Bicycle,Sports,30.38,Reebok,22,4.49,4.8
+190,Bose Perfume,Beauty,39.8,Bose,217,1.49,4.1
+191,Samsung Perfume,Beauty,45.71,Samsung,226,4.54,4.3
+192,Dell Soccer Ball,Sports,160.14,Dell,456,1.68,4.7
+193,Nike Headphones,Electronics,1872.93,Nike,346,3.63,3.9
+194,Sony Boots,Clothing,81.41,Sony,-3,0.34,4.2
+195,Adidas Yoga Mat,Sports,450.43,Adidas,73,4.39,3.6
+196,Reebok Yoga Mat,Sports,385.23,Reebok,419,2.68,4.8
+197,Puma Monitor,Electronics,1869.81,Puma,277,0.62,3.7
+198,Samsung Fiction Novel,Books,49.13,Samsung,422,3.19,4.1
+199,Reebok Electric Razor,Beauty,140.59,Reebok,52,0.25,4.3
+200,Logitech Smartphone,Electronics,745.91,Logitech,134,0.69,4.8
+201,HP T-Shirt,Clothing,92.79,HP,280,1.15,3.8
+202,Nike Bicycle,Sports,297.41,Nike,246,4.96,4.9
+203,Sony Running Shoes,Sports,117.65,Sony,477,2.5,3.9
+204,HP Running Shoes,Sports,241.1,HP,124,0.17,5.0
+205,Adidas Bookshelf,Home,107.0,Adidas,163,3.55,4.3
+206,JBL Soccer Ball,Sports,428.56,JBL,454,0.62,4.3
+207,Sony Biography,Books,21.92,Sony,346,2.07,3.6
+208,Nike Dress,Clothing,146.37,Nike,96,1.49,3.5
+209,JBL Laptop,Electronics,827.48,JBL,185,1.46,3.7
+210,Samsung Lamp,Home,721.28,Samsung,59,2.4,4.4
+211,LG Biography,Books,30.53,LG,66,2.29,4.7
+212,Samsung Programming Book,Books,29.41,Samsung,122,1.06,4.1
+213,Reebok Fiction Novel,Books,26.63,Reebok,282,4.45,3.8
+214,Microsoft Jeans,Clothing,79.52,Microsoft,10,1.21,3.7
+215,HP Headphones,Electronics,1350.67,HP,228,4.23,3.8
+216,Microsoft Headphones,Electronics,1700.43,Microsoft,131,4.37,4.4
+217,Microsoft Fiction Novel,Books,26.19,Microsoft,442,0.3,4.3
+218,Bose Speaker,Electronics,1763.26,Bose,432,0.29,4.3
+219,LG Self-Help,Books,25.93,LG,83,,3.6
+220,Nike Table,Home,594.11,Nike,406,4.81,4.7
+221,Nike Makeup Kit,Beauty,39.68,Nike,295,3.06,4.8
+222,Sony Curtains,Home,764.5,Sony,462,2.83,4.1
+223,Canon Makeup Kit,Beauty,78.85,Canon,285,4.81,4.2
+224,Samsung Chair,Home,303.29,Samsung,338,2.58,4.6
+225,Microsoft Tennis Racket,Sports,193.55,Microsoft,417,1.43,4.8
+226,LG Smartphone,Electronics,467.54,LG,94,2.08,3.8
+227,Sony Dress,Clothing,46.53,Sony,499,1.27,4.4
+228,Logitech Chair,Home,128.95,Logitech,457,2.3,4.3
+229,Adidas Sweater,Clothing,172.72,Adidas,364,1.53,4.0
+230,Reebok Boots,Clothing,254.7,Reebok,491,0.83,3.5
+231,Microsoft Cookbook,Books,16.74,Microsoft,345,1.92,4.5
+232,Samsung Electric Razor,Beauty,147.02,Samsung,217,0.46,4.8
+233,Adidas Electric Razor,Beauty,150.48,Adidas,348,1.23,4.0
+234,Logitech Perfume,Beauty,51.69,Logitech,120,1.02,4.0
+235,Apple Dress,Clothing,87.03,Apple,354,0.29,3.6
+236,Adidas Tablet,Electronics,1867.3,Adidas,193,3.48,4.5
+237,JBL Sofa,Home,717.27,JBL,48,2.68,4.8
+238,Bose Sofa,Home,712.09,Bose,454,2.31,4.2
+239,LG Makeup Kit,Beauty,67.28,LG,224,3.46,3.5
+240,Logitech Dumbbell,Sports,447.97,Logitech,202,3.38,4.5
+241,Bose Smartphone,Electronics,269.05,Bose,90,0.25,4.8
+242,Samsung Dumbbell,Sports,222.2,Samsung,56,2.64,4.6
+243,Puma Camera,Electronics,1936.44,Puma,140,2.82,4.2
+244,Sony Dress,Clothing,103.52,Sony,305,4.42,4.4
+245,LG Hair Dryer,Beauty,188.48,LG,99,3.59,3.6
+246,LG Hair Dryer,Beauty,120.87,LG,348,2.73,3.6
+247,Apple Smartphone,Electronics,860.15,Apple,121,3.51,4.5
+248,LG Skincare Set,Beauty,29.84,LG,425,0.78,4.1
+249,Microsoft Camera,Electronics,1880.62,Microsoft,333,1.77,4.3
+250,HP Programming Book,Books,30.66,HP,33,3.71,4.2
