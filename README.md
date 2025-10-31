@@ -1,136 +1,322 @@
-# ETL Data Lake Demo
+# ETL Data Lake Demo · End‑to‑End Data Engineering Project
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![PySpark](https://img.shields.io/badge/PySpark-ETL-orange?logo=apache-spark)
-![AWS](https://img.shields.io/badge/AWS-Ready-FF9900?logo=amazon-aws)
-![SQL](https://img.shields.io/badge/SQL-Analytics-4169E1?logo=postgresql)
+![AWS Ready](https://img.shields.io/badge/AWS-Ready-FF9900?logo=amazon-aws)
+![SQL Analytics](https://img.shields.io/badge/SQL-Analytics-4169E1?logo=postgresql)
 
-Pipeline de datos end-to-end que simula un flujo **Data Lake -> Data Warehouse** usando PySpark y un modelo analitico tipo estrella. El objetivo es demostrar dominio en ingenieria de datos, limpieza de datasets con problemas reales y preparacion de informacion para cargas en Amazon Redshift.
+**[English](#english)** | **[Español](#español)**
 
-## Resumen del Proyecto
-- 50K+ transacciones de ventas generadas sinteticamente con inconsistencias intencionales.
-- Limpieza de datos con PySpark para dejar un esquema estrella consistente.
-- Scripts SQL listos para desplegar el modelo analitico en Redshift/PostgreSQL.
-- Notebook de analisis exploratorio para validar la calidad del pipeline y hallar insights.
+---
 
-## Arquitectura del Flujo
+## English
+
+**Data Lake → Data Warehouse** pipeline that cleanses 50K+ transactions with PySpark, builds a **star schema ready for Redshift**, and delivers analytical assets for dashboards. The goal is to demonstrate technical mastery, data quality management, and cloud-ready solutions mindset.
+
+> Designed as a professional portfolio project: reproducible, documented, and with tangible results.
+
+### Highlights
+
+- 3 synthetic datasets (customers, products, sales) with realistic quality issues
+- PySpark pipeline that cleanses **9.6% of invalid records** and generates `fact_sales`, `dim_customer`, `dim_product`
+- Production-grade SQL: DDL optimized for Redshift + aggregated views and business-ready queries for BI
+- EDA notebook with business storytelling and commercial performance visualizations
+- Ready to migrate to AWS (S3, Glue, Redshift, QuickSight) with no major rewrite
+
+### Architecture at a Glance
+
 ```
-Data Lake (S3)          Transformacion (PySpark)        Data Warehouse (Redshift)
----------------  ->  ---------------------------  ->  --------------------------
-customers.csv          - Limpieza de datos               dim_customer
-products.csv           - Validaciones                    dim_product
-sales.csv              - Creacion de star schema         fact_sales
-```
-
-1. `scripts/generate_sample_data.py` crea datasets crudos con problemas de calidad controlados.  
-2. `src/transform/transform_sales_data.py` limpia y consolida la informacion con PySpark.  
-3. Los datasets procesados se almacenan en `data/processed/` listos para cargas en Redshift.  
-4. Las consultas analiticas viven en `sql/` y se pueden ejecutar sobre el warehouse.
-
-## Caracteristicas Clave
-- ETL PySpark con reglas de negocio y validaciones robustas.
-- Manejo del 9.6% de registros invalidos en los datos de ventas.
-- Esquema estrella con metricas derivadas y dimensiones ricas.
-- Queries analiticas preconstruidas para validar el modelo de negocio.
-- Notebook de EDA para presentar hallazgos y visualizaciones clave.
-- Preparado para migrarse a servicios gestionados de AWS (Glue, Redshift, QuickSight).
-
-## Calidad de Datos
-| Dataset  | Registros crudos | Registros limpios | Problemas resueltos |
-|----------|------------------|-------------------|---------------------|
-| Customers | 1,000 | 963 | Emails invalidos/duplicados, valores nulos, tipos inconsistentes |
-| Products  | 150  | 148 | Precios negativos, stock invalido, ratings fuera de rango |
-| Sales     | 50,000 | 45,179 | Fechas futuras, FKs huerfanas, cantidades negativas, duplicados |
-
-**Tipos de issues tratados:** correccion de descuentos, normalizacion de fechas, integridad referencial, imputaciones controladas y deduplicacion.
-
-## Estructura del Proyecto
-```
-etl-datalake-demo/
-|-- data/
-|   |-- raw/              # Datos crudos (customers, products, sales)
-|   |-- processed/        # Salidas limpias: dim_customer, dim_product, fact_sales
-|   `-- analytics/        # Sets agregados para reporting
-|-- notebooks/
-|   `-- exploratory_analysis.ipynb
-|-- scripts/
-|   `-- generate_sample_data.py
-|-- src/
-|   |-- transform/
-|   |   `-- transform_sales_data.py
-|   `-- utils/
-|       `-- logging_config.py
-|-- sql/
-|   |-- create_tables.sql
-|   `-- analytical_queries.sql
-|-- requirements.txt
-`-- README.md
+┌──────────────┐   ┌────────────────────────┐   ┌─────────────────────┐
+│  Data Lake   │   │  PySpark Transform     │   │  Data Warehouse     │
+│  (S3/local)  │──►│  Validation & Star     │──►│  Amazon Redshift/   │
+│ customers.csv│   │  Schema clean_*        │   │  PostgreSQL         │
+│ products.csv │   │  functions, business   │   │                     │
+│ sales.csv    │   │  metrics, saved to     │   │ fact_sales + dims   │
+│              │   │  processed/            │   │                     │
+└──────────────┘   └────────────────────────┘   └─────────────────────┘
 ```
 
-## Requisitos Previos
+### Pipeline Journey
+
+1. **Data Generation** – `scripts/generate_sample_data.py` creates datasets with fixed seeds and intentional issues (nulls, duplicates, orphan FKs, negative prices).
+2. **PySpark Transformation** – `src/transform/transform_sales_data.py` cleanses, validates, and builds the star schema with calculated metrics (`total_amount`, `discount_amount`, etc.).
+3. **Persistence** – Outputs in `data/processed/` (partitioned CSV) ready for `COPY` commands to Redshift.
+4. **Analytical Validation** – `notebooks/exploratory_analysis.ipynb` and `sql/analytical_queries.sql` test performance, trends, and key KPIs.
+
+### Data Assets
+
+#### Resulting Star Schema
+
+| Table          | Brief Description                                   |
+|----------------|-----------------------------------------------------|
+| `fact_sales`   | Transactions with derived metrics and status        |
+| `dim_customer` | Cleansed customers with segments and geography      |
+| `dim_product`  | Catalog with prices, ratings, and categories        |
+
+See full definition in `sql/create_tables.sql` and DBML model in `sql/dbdiagram_schema.txt`.
+
+#### Quality Metrics
+
+| Dataset   | Raw Records | Clean Records | Issues Resolved |
+|-----------|-------------|---------------|-----------------|
+| Customers | 1,000       | 963           | Invalid/duplicate emails, nulls, type casting |
+| Products  | 150         | 148           | Negative prices, invalid stock, out-of-range ratings |
+| Sales     | 50,000      | 45,179        | Future/null dates, orphan FKs, negative quantities, duplicates |
+
+The pipeline includes detailed logs (`utils/logging_config.py`) for traceability of each step.
+
+### Analytical Toolkit
+
+- `sql/create_tables.sql` – DDL with DISTKEY/SORTKEY, aggregated views, and validations.
+- `sql/analytical_queries.sql` – Revenue by category, LTV by segment, cohorts, discounts, monthly trends.
+- `notebooks/exploratory_analysis.ipynb` – Visualizations (top products, seasonality, discount impact) and business findings.
+
+### Requirements
+
 - Python 3.12
-- Java/JDK 11+ para ejecutar PySpark
-- Dependencias listadas en `requirements.txt`
-- (Opcional) Acceso a un cluster Redshift o PostgreSQL para ejecutar los scripts SQL
+- Java/JDK 11+ (required for PySpark)
+- Dependencies from `requirements.txt`
+- (Optional) Redshift/PostgreSQL cluster to run SQL scripts
 
-## Instalacion y Ejecucion
+### Quickstart
+
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/etl-datalake-demo.git
+# 1. Clone the repository
+git clone https://github.com/your-user/etl-datalake-demo.git
 cd etl-datalake-demo
 
-# 2. Crear entorno virtual
+# 2. Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3. Instalar dependencias
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Generar o refrescar datos crudos
+# 4. Generate/refresh raw data
 python scripts/generate_sample_data.py
 
-# 5. Ejecutar el pipeline PySpark
+# 5. Run PySpark pipeline
 python src/transform/transform_sales_data.py
 
-# 6. (Opcional) Abrir el notebook de EDA
+# 6. (Optional) Explore results with EDA notebook
 jupyter notebook notebooks/exploratory_analysis.ipynb
 ```
 
-Los datasets procesados se guardan en `data/processed/` y pueden cargarse en Redshift mediante el comando `COPY` o integraciones de Glue.
+Processed CSVs will be in `data/processed/`. To load them into Redshift, use COPY from S3 or integrate with AWS Glue.
 
-## Resultados del Pipeline
-- Dimensiones: `dim_customer`, `dim_product`
-- Tabla de hechos: `fact_sales` con metricas derivadas (`total_amount`, `discount_amount`, etc.)
-- Agregados para dashboards en `data/analytics/`
-- Logs detallados durante la ejecucion para trazar calidad y volumen
+### AWS-Ready
 
-## SQL y Analisis
-- `sql/create_tables.sql`: DDL optimizado para Amazon Redshift (DISTKEY, SORTKEY, vistas materializadas).
-- `sql/analytical_queries.sql`: Consultas para revenue por categoria, LTV por segmento, analisis de descuentos, cohortes y series temporales.
+- **Storage**: Upload `data/raw/` to an S3 bucket (raw zone).
+- **Transform**: Execute `transform_sales_data.py` as a PySpark job in AWS Glue/EMR.
+- **Load**: Use `sql/create_tables.sql` in Redshift and consume processed CSVs stored in S3.
+- **Visualization**: Connect QuickSight to Redshift and leverage aggregated views.
 
-## Exploratory Data Analysis
-`notebooks/exploratory_analysis.ipynb` documenta estadisticas descriptivas, visualizaciones y hallazgos de negocio:
-- Distribucion de ventas por categoria y segmento.
-- Top 10 productos por revenue.
-- Ventas mensuales y estacionalidad.
-- Impacto de descuentos y correlaciones clave.
+### Project Structure
 
-## Roadmap AWS
-- [ ] Cargar datos en Amazon S3 como data lake.
-- [ ] Migrar la transformacion a AWS Glue (PySpark job).
-- [ ] Automatizar cargas a Amazon Redshift.
-- [ ] Publicar dashboards en Amazon QuickSight.
-- [ ] Orquestar el pipeline con EventBridge / Step Functions.
+```
+etl-datalake-demo/
+├── data/
+│   ├── raw/          # Customers/products/sales with controlled issues
+│   ├── processed/    # Clean star schema (PySpark outputs)
+│   └── analytics/    # Space for aggregates and dashboards
+├── notebooks/
+│   └── exploratory_analysis.ipynb
+├── scripts/
+│   └── generate_sample_data.py
+├── sql/
+│   ├── create_tables.sql
+│   ├── analytical_queries.sql
+│   └── dbdiagram_schema.txt
+├── src/
+│   ├── transform/transform_sales_data.py
+│   └── utils/logging_config.py
+└── README.md
+```
 
-## Tecnologias
+### Portfolio Story
+
+- **Problem**: Messy e-commerce data preventing reliable analysis.
+- **Solution**: Reproducible PySpark pipeline that validates and structures information into a star schema.
+- **Impact**: 90% of sales recovered, critical KPIs calculated, and dashboards enabled in minutes.
+- **Scalability**: Architecture ready to migrate to AWS serverless services with no drastic changes.
+
+### Roadmap
+
+- [ ] Publish datasets to S3 and orchestrate with EventBridge/Step Functions
+- [ ] Migrate transformations to AWS Glue for serverless execution
+- [ ] Automate loads to Amazon Redshift (COPY/Glue Job)
+- [ ] Build QuickSight dashboard with generated views
+- [ ] Add quality monitoring with Great Expectations or Deequ
+
+### Technologies
+
+- **Python 3.12**, **PySpark** for distributed ETL.
+- **Pandas, Matplotlib, Seaborn** for analysis and visualization.
+- **PostgreSQL / Amazon Redshift** as data warehouse.
+- **Faker** to generate data with realistic variations.
+- **SQL** for dimensional modeling and business queries.
+
+### Author
+
+- Maintainer: `@raulps819`
+
+### License
+
+This project is distributed under the MIT License. See `LICENSE` for details.
+
+---
+
+## Español
+
+Pipeline de datos tipo **Data Lake → Data Warehouse** que limpia 50K+ transacciones con PySpark, levanta un **esquema estrella listo para Redshift** y entrega material analítico para dashboards. El objetivo es mostrar dominio técnico, manejo de calidad de datos y mentalidad de soluciones en la nube.
+
+> Diseñado como proyecto de portafolio profesional: reproducible, documentado y con resultados tangibles.
+
+### Highlights
+
+- 3 datasets sintéticos (clientes, productos, ventas) con problemas de calidad realistas
+- Pipeline PySpark que sanea el **9.6% de registros inválidos** y genera `fact_sales`, `dim_customer`, `dim_product`
+- SQL productivo: DDL optimizado para Redshift + vistas y queries de negocio listas para BI
+- Notebook EDA con storytelling de negocio y visualizaciones de performance comercial
+- Preparado para migrar a AWS (S3, Glue, Redshift, QuickSight) sin reescritura masiva
+
+### Arquitectura a Simple Vista
+
+```
+┌──────────────┐   ┌────────────────────────┐   ┌─────────────────────┐
+│  Data Lake   │   │  Transformación        │   │  Data Warehouse     │
+│  (S3/local)  │──►│  PySpark Validación y  │──►│  Amazon Redshift /  │
+│ customers.csv│   │  Star Schema clean_*   │   │  PostgreSQL         │
+│ products.csv │   │  funciones, métricas   │   │                     │
+│ sales.csv    │   │  de negocio, guardado  │   │ fact_sales + dims   │
+│              │   │  en processed/         │   │                     │
+└──────────────┘   └────────────────────────┘   └─────────────────────┘
+```
+
+### Recorrido del Pipeline
+
+1. **Generación de datos** – `scripts/generate_sample_data.py` crea datasets con seeds fijos y issues intencionales (nulos, duplicados, FKs huérfanas, precios negativos).
+2. **Transformación PySpark** – `src/transform/transform_sales_data.py` limpia, valida y arma el star schema con métricas calculadas (`total_amount`, `discount_amount`, etc.).
+3. **Persistencia** – Salidas en `data/processed/` (CSV particionados) listas para comandos `COPY` hacia Redshift.
+4. **Validación Analítica** – `notebooks/exploratory_analysis.ipynb` y `sql/analytical_queries.sql` prueban rendimiento, tendencias y KPIs clave.
+
+### Activos de Datos
+
+#### Star Schema Resultante
+
+| Tabla          | Descripción breve                                  |
+|----------------|----------------------------------------------------|
+| `fact_sales`   | Transacciones con métricas derivadas y estado      |
+| `dim_customer` | Clientes depurados con segmentos y geografía       |
+| `dim_product`  | Catálogo con precios, ratings y categorías         |
+
+Consulta la definición completa en `sql/create_tables.sql` y el modelo DBML en `sql/dbdiagram_schema.txt`.
+
+#### Métricas de Calidad
+
+| Dataset   | Registros crudos | Registros limpios | Issues resueltos |
+|-----------|------------------|-------------------|------------------|
+| Customers | 1,000            | 963               | Emails inválidos/duplicados, nulos, tipificación |
+| Products  | 150              | 148               | Precios negativos, stock inválido, ratings fuera de rango |
+| Sales     | 50,000           | 45,179            | Fechas futuras/nulas, FKs huérfanas, cantidades negativas, duplicados |
+
+El pipeline incluye logs detallados (`utils/logging_config.py`) para trazabilidad de cada paso.
+
+### Toolkit Analítico
+
+- `sql/create_tables.sql` – DDL con DISTKEY/SORTKEY, vistas agregadas y validaciones.
+- `sql/analytical_queries.sql` – Revenue por categoría, LTV por segmento, cohortes, descuentos, tendencias mensuales.
+- `notebooks/exploratory_analysis.ipynb` – Visualizaciones (top productos, estacionalidad, impacto de descuentos) y hallazgos de negocio.
+
+### Requisitos
+
+- Python 3.12
+- Java/JDK 11+ (necesario para PySpark)
+- Dependencias de `requirements.txt`
+- (Opcional) Cluster Redshift/PostgreSQL para ejecutar los scripts SQL
+
+### Quickstart
+
+```bash
+# 1. Clona el repositorio
+git clone https://github.com/tu-usuario/etl-datalake-demo.git
+cd etl-datalake-demo
+
+# 2. Crea y activa un entorno virtual
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+
+# 3. Instala dependencias
+pip install -r requirements.txt
+
+# 4. Genera/actualiza los datos crudos
+python scripts/generate_sample_data.py
+
+# 5. Ejecuta el pipeline PySpark
+python src/transform/transform_sales_data.py
+
+# 6. (Opcional) Explora resultados con el notebook EDA
+jupyter notebook notebooks/exploratory_analysis.ipynb
+```
+
+Los CSV procesados quedarán en `data/processed/`. Para cargarlos en Redshift, usa COPY desde S3 o integra con AWS Glue.
+
+### Preparado para AWS
+
+- **Storage**: Subir `data/raw/` a un bucket S3 (raw zone).
+- **Transform**: Ejecutar `transform_sales_data.py` como job PySpark en AWS Glue/EMR.
+- **Load**: Usar `sql/create_tables.sql` en Redshift y consumir los CSV procesados almacenados en S3.
+- **Visualización**: Conectar QuickSight a Redshift y aprovechar las vistas agregadas.
+
+### Estructura del Proyecto
+
+```
+etl-datalake-demo/
+├── data/
+│   ├── raw/          # Customers/products/sales con issues controlados
+│   ├── processed/    # Star schema limpio (PySpark outputs)
+│   └── analytics/    # Espacio para agregados y dashboards
+├── notebooks/
+│   └── exploratory_analysis.ipynb
+├── scripts/
+│   └── generate_sample_data.py
+├── sql/
+│   ├── create_tables.sql
+│   ├── analytical_queries.sql
+│   └── dbdiagram_schema.txt
+├── src/
+│   ├── transform/transform_sales_data.py
+│   └── utils/logging_config.py
+└── README.md
+```
+
+### Historia para Portafolio
+
+- **Problema**: Datos e-commerce desordenados que impiden análisis confiables.
+- **Solución**: Pipeline reproducible con PySpark que valida y estructura la información en un modelo estrella.
+- **Impacto**: Se recupera el 90% de las ventas, se calculan KPIs críticos y se habilitan dashboards en minutos.
+- **Escalabilidad**: Arquitectura lista para migrar a servicios serverless de AWS sin cambios drásticos.
+
+### Roadmap
+
+- [ ] Publicar datasets en S3 y orquestar con EventBridge/Step Functions
+- [ ] Migrar transformaciones a AWS Glue para ejecución serverless
+- [ ] Automatizar cargas a Amazon Redshift (COPY/Glue Job)
+- [ ] Construir dashboard QuickSight con vistas generadas
+- [ ] Añadir monitoreo de calidad con Great Expectations o Deequ
+
+### Tecnologías
+
 - **Python 3.12**, **PySpark** para ETL distribuidos.
-- **Pandas, Matplotlib, Seaborn** para analisis y visualizacion.
+- **Pandas, Matplotlib, Seaborn** para análisis y visualización.
 - **PostgreSQL / Amazon Redshift** como data warehouse.
 - **Faker** para generar datos con variaciones realistas.
 - **SQL** para modelado dimensional y consultas de negocio.
 
-## Autor
+### Autor
+
 - Maintainer: `@raulps819`
 
-## Licencia
-Este proyecto se distribuye bajo la licencia MIT. Revisa `LICENSE` para mas detalles.
+### Licencia
+
+Este proyecto se distribuye bajo la licencia MIT. Revisa `LICENSE` para más detalles.
