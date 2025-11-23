@@ -50,9 +50,9 @@ sql/             # DDL and analytical queries (Redshift-optimized)
 src/transform/   # PySpark ETL code
 ```
 
-## AWS deployment
+## Notes
 
-The pipeline is designed to run on AWS Glue/EMR with minimal changes. Upload raw data to S3, run the transform job, and load results into Redshift using COPY commands.
+SQL scripts use Redshift-specific syntax (DISTKEY, SORTKEY). The PySpark pipeline runs locally but the output is compatible with Redshift's COPY command.
 
 ## License
 
